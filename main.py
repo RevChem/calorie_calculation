@@ -4,12 +4,10 @@ from ultralytics import YOLO
 import os
 from fastapi.responses import StreamingResponse
 import io
-from sqlalchemy.orm import Session
-from dao.database import get_db 
 
 
 # Загружаем обученную модель
-model = YOLO("weights/best.pt") 
+model = YOLO("weights/best1.pt") 
 app = FastAPI()
 
 
@@ -30,5 +28,6 @@ async def predict(file: UploadFile = File(...)):
     # Конвертируем изображение в байты для ответа
     img_bytes = io.BytesIO()
     Image.fromarray(plotted_img[..., ::-1].copy()).save(img_bytes, format="JPEG")  # BGR -> RGB
+
 
     return StreamingResponse(io.BytesIO(img_bytes.getvalue()), media_type="image/jpeg")

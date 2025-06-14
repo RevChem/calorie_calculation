@@ -1,7 +1,7 @@
 import requests
 
 url = "http://localhost:8000/predict/"
-file_path = "9.jpeg"
+file_path = "11.jpg"
 
 with open(file_path, "rb") as f:
     files = {"file": f}
